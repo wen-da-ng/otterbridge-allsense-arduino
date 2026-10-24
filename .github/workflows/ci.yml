@@ -8,6 +8,9 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    # While the repository is private, library.properties' url can't be loaded (rule LP042); the lint
+    # still runs and reports, but only blocks once the repository is public.
+    continue-on-error: ${{ github.event.repository.private }}
     steps:
       - uses: actions/checkout@v4
       - uses: arduino/arduino-lint-action@v2
